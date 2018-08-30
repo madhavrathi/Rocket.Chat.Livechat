@@ -1,7 +1,7 @@
 import { h } from 'preact';
+import { className } from 'components/helpers';
 import style from './style';
-const getStyles = (style, name, classes) => [style[name], ...Object.entries(style).filter(([key]) => classes[key]).map(([, value]) => value)].join(' ');
 
-const Typing = ({ children }) => (<div aria-label={children} class={getStyles(style, 'loader', {})}><span class={getStyles(style, 'dot', {})} /><span class={getStyles(style, 'dot', {})} /><span class={getStyles(style, 'dot', {})} /></div>);
+const Typing = ({ children }) => (<div aria-label={children} class={className(style, 'loader')}><span class={className(style, 'dot')} /><span class={className(style, 'dot')} /><span class={className(style, 'dot')} /></div>);
 
 export default Typing;

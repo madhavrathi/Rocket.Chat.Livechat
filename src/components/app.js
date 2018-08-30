@@ -1,9 +1,6 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 
-import Header from './header';
-import Footer from './footer';
-
 // Code-splitting is automated for routes
 import Home from '../routes/home';
 import Profile from '../routes/profile';
@@ -21,13 +18,11 @@ export default class App extends Component {
 	render() {
 		return (
 			<div id="app">
-				<Header>Need help?</Header>
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
 					<Profile path="/profile/" user="me" />
 					<Profile path="/profile/:user" />
 				</Router>
-				<Footer>Powered by Rocket.Chat</Footer>
 			</div>
 		);
 	}

@@ -1,0 +1,14 @@
+@import '~styles/colors';
+@import '~styles/variables';
+
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+.main {
+	padding: 0 $default-padding;
+	flex: 1 1 auto;
+	overflow-y: scroll;
+}

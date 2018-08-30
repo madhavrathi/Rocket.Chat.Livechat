@@ -9,6 +9,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
 		'react': 'preact-compat',
 		'react-dom': 'preact-compat',
 		'styles': path.join(__dirname, '../src/styles'),
+		'components': path.join(__dirname, '../src/components'),
 		'autoI18n': path.resolve(__dirname, '../src/i18n')
 	};
 
@@ -24,6 +25,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
 			I18n: ['autoI18n', 'default']
 		})
 	);
+	// defaultConfig.plugins.unshift	(new PrepackPlugin({}))
 
 	defaultConfig.module.rules[2] = ({
 		test: /\.(s?css|sass)$/,

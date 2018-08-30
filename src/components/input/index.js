@@ -1,10 +1,9 @@
 import { h } from 'preact';
+import { className } from 'components/helpers';
 import style from './style';
 
-const getStyles = (style, name, classes) => [style[name], ...Object.entries(style).filter(([key]) => classes[key]).map(([, value]) => value)].join(' ');
-
 const Input = ({ children, disabled, error, danger, stack, small, ...args }) => (
-	<input {...args} disabled={disabled} className={getStyles(style, 'input', {
+	<input {...args} disabled={disabled} className={className(style, 'input', {
 		disabled,
 		error,
 		danger,
@@ -17,7 +16,7 @@ const Input = ({ children, disabled, error, danger, stack, small, ...args }) => 
 export default Input;
 
 export const Select = ({ children, disabled, error, danger, stack, small, ...args }) => (
-	<input {...args} disabled={disabled} className={getStyles(style, 'input', {
+	<input {...args} disabled={disabled} className={className(style, 'input', {
 		disabled,
 		error,
 		danger,
@@ -27,24 +26,35 @@ export const Select = ({ children, disabled, error, danger, stack, small, ...arg
 	>{children}</input>
 );
 
-export const Form = ({ children, ...args }) => <form onSubmit={(e) => e.preventDefault()} {...args}> {children} </form>;
+const preventDefault = (e) => e.preventDefault();
 
-export const Label = ({ children, error }) => (<label className={getStyles(style, 'label', {
-	error,
-})}
-                                               >{children}</label>);
+export const Form = ({ children, ...args }) => <form onSubmit={preventDefault} {...args}> {children} </form>;
+
+export const Label = ({ children, error }) => (
+	<label
+		className={className(style, 'label', {
+			error,
+		})}
+	>
+		{children}
+	</label>
+);
 
 export const Description = ({ children }) => <small className={style.description}>{children}</small>;
 
-export const Error = ({ children }) => (<small
-	className={getStyles(style, 'description', {
-		error: true,
-	})}
-                                        >{children}</small>);
+export const Error = ({ children }) => (
+	<small
+		className={className(style, 'description', {
+			error: true,
+		})}
+	>
+		{children}
+	</small>
+);
 
 export const Item = ({ children, inline }) => (
 	<div
-		className={getStyles(style, 'formGroup', { inline })}
+		className={className(style, 'formGroup', { inline })}
 	>
 		{children}
 	</div>);

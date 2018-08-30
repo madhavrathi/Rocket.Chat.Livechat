@@ -1,11 +1,12 @@
 import { h } from 'preact';
+import { className } from 'components/helpers';
 import style from './style';
-const getStyles = (style, name, classes) => [style[name], ...Object.entries(style).filter(([key]) => classes[key]).map(([, value]) => value)].join(' ');
+
 
 const Composer = ({ pre, post, placeholder, ...args }) => (
-	<div {...args} className={getStyles(style, 'composer', {})}>
+	<div {...args} className={className(style, 'composer', {})}>
 		{ pre }
-		<div placeholder={placeholder} className={getStyles(style, 'input', {})} contenteditable />
+		<div placeholder={placeholder} className={className(style, 'input', {})} contenteditable />
 		{ post }
 	</div>);
 
