@@ -1,3 +1,6 @@
+const path = require('path');
+const webpack = require('webpack');
+
 /**
  * Function that mutates original webpack config.
  * Supports asynchronous changes when promise is returned.
@@ -10,6 +13,7 @@
 export default (config, env, helpers) => {
 	// Use Preact CLI's helpers object to get the babel-loader
 	const babel = helpers.getLoadersByName(config, 'babel-loader')[0].rule;
+
 	// Update the loader config to include preact-i18nline
 	babel.loader = [
 		{ // create an entry for the old loader
@@ -22,6 +26,19 @@ export default (config, env, helpers) => {
 	];
 	// remove the old loader options
 	delete babel.options;
-	config.resolve.alias.styles = './src/styles';
+
+	config.resolve.alias = Object.assign({}, config.resolve.alias, {
+		react: 'preact-compat',
+		'react-dom': 'preact-compat',
+		styles: path.join(__dirname, './src/styles'),
+		components: path.join(__dirname, './src/components'),
+		autoI18n: path.resolve(__dirname, './src/i18n'),
+	});
+
+	config.plugins.push(
+		new webpack.ProvidePlugin({
+			I18n: ['autoI18n', 'default'],
+		})
+	);
 	return config;
 };

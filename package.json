@@ -9,25 +9,34 @@
     "dev": "preact watch",
     "lint": "eslint src",
     "test": "jest ./tests",
-		"storybook": "start-storybook -p 9001 -c .storybook",
-		"i18n": "i18nline synch"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "i18n": "i18nline synch"
   },
+  "browserslist": [
+    "> 1%",
+    "IE >= 9",
+    "last 2 versions"
+  ],
   "eslintIgnore": [
     "build/*"
-	],
-	"i18n" :{
-		"autoTranslateTags": [
-			"h1",
-			"h2",
-			"h3",
-			"h4",
-			"h5",
-			"h6",
-			"p"
-		],
-		"ignorePatterns": ["story.js"]
-	},
+  ],
+  "i18n": {
+    "autoTranslateTags": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p"
+    ],
+    "ignorePatterns": [
+      "story.js"
+    ]
+  },
   "devDependencies": {
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-stage-3": "^7.0.0",
     "@storybook/addon-centered": "^3.4.10",
     "@storybook/addon-knobs": "^3.4.10",
     "@storybook/addon-options": "^3.4.10",
@@ -53,6 +62,7 @@
     "preact": "^8.2.6",
     "preact-i18nline": "^2.0.0",
     "preact-router": "^2.5.7",
+    "prepack-webpack-plugin": "^1.1.1",
     "sass-loader": "^7.1.0",
     "storybook-addon-jsx": "^5.4.0"
   },
