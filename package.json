@@ -35,6 +35,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-stage-3": "^7.0.0",
     "@storybook/addon-centered": "^3.4.10",
     "@storybook/addon-knobs": "^3.4.10",
     "@storybook/addon-options": "^3.4.10",
