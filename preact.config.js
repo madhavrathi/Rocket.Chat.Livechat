@@ -31,10 +31,16 @@ export default (config, env, helpers) => {
 		react: 'preact-compat',
 		'react-dom': 'preact-compat',
 		styles: path.join(__dirname, './src/styles'),
+		icons: path.join(__dirname, './src/icons'),
 		components: path.join(__dirname, './src/components'),
 		autoI18n: path.resolve(__dirname, './src/i18n'),
 	});
 
+	config.module.loaders[8].test = /\.(woff2?|ttf|eot|jpe?g|png|gif|mp4|mov|ogg|webm)(\?.*)?$/i;
+	config.module.loaders.push({
+		test: /\.svg$/,
+		loader: 'desvg-loader/preact!svg-loader',
+	});
 	config.plugins.push(
 		new webpack.ProvidePlugin({
 			I18n: ['autoI18n', 'default'],

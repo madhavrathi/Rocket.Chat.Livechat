@@ -10,10 +10,12 @@ module.exports = (baseConfig, env, defaultConfig) => {
 		'react-dom': 'preact-compat',
 		'styles': path.join(__dirname, '../src/styles'),
 		'components': path.join(__dirname, '../src/components'),
+		'icons': path.join(__dirname, '../src/icons'),
 		'autoI18n': path.resolve(__dirname, '../src/i18n')
 	};
 
 	defaultConfig.resolve.extensions.push('.css');
+	defaultConfig.resolve.extensions.push('.svg');
 	defaultConfig.resolve.extensions.push('.scss');
 	// defaultConfig.resolve.extensions.push('.sass');
 
@@ -49,7 +51,9 @@ module.exports = (baseConfig, env, defaultConfig) => {
 		]
 	})
 
+
 	const { include, exclude, test, ...loader } = defaultConfig.module.rules[0];
+
 	defaultConfig.module.rules[0] = {
 		test,
 		include,
@@ -61,6 +65,11 @@ module.exports = (baseConfig, env, defaultConfig) => {
 			},
 		]
 	}
+	defaultConfig.module.rules[4].test = /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2)(\?.*)?$/;
+	defaultConfig.module.rules.push({
+		test: /\.svg$/,
+		loader: 'desvg-loader/preact!svg-loader'
+	})
 
 
 	return defaultConfig;

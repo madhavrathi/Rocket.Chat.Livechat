@@ -53,15 +53,20 @@
     "preact-compat": "^3.18.2",
     "preact-render-spy": "^1.2.1",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.22.1"
+    "style-loader": "^0.22.1",
+    "svg-loader": "0.0.2"
   },
   "dependencies": {
+    "@kossnocorp/desvg": "^0.2.0",
     "@storybook/addon-options": "^3.4.10",
+    "desvg": "^1.0.2",
+    "desvg-loader": "^0.1.0",
     "i18nline": "^2.0.1",
     "node-sass": "^4.9.3",
     "preact": "^8.2.6",
     "preact-i18nline": "^2.0.0",
     "preact-router": "^2.5.7",
+    "preact-virtual-list": "^0.3.1",
     "prepack-webpack-plugin": "^1.1.1",
     "sass-loader": "^7.1.0",
     "storybook-addon-jsx": "^5.4.0"
