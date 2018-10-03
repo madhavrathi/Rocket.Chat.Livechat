@@ -4,7 +4,7 @@
 @mixin state($color) {
 	border-color: $color;
 	background: $color;
-	&.button--outline {
+	&--outline {
 		color: $color;
 	}
 }
