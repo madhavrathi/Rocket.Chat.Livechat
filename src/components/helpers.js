@@ -12,7 +12,7 @@ function flatMap(arr, mapFunc) {
 	return result;
 }
 
-export const className = (styles, elementName, modifiers = {}) => [
+export const createClassName = (styles, elementName, modifiers = {}) => [
 	styles[elementName],
 	...(flatMap(Object.entries(modifiers), ([modifierKey, modifierValue]) => [
 		modifierValue && styles[`${ elementName }--${ modifierKey }`],

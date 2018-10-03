@@ -1,14 +1,4 @@
-const path = require('path');
-const webpack = require('webpack');
-
-/**
- * Function that mutates original webpack config.
- * Supports asynchronous changes when promise is returned.
- *
- * @param {object} config - original webpack config.
- * @param {object} env - options passed to CLI.
- * @param {WebpackConfigHelpers} helpers - object with useful helpers when working with config.
- **/
+const webpackOverride = require('./webpackOverride.config');
 
 export default (config, env, helpers) => {
 	// Use Preact CLI's helpers object to get the babel-loader
@@ -26,19 +16,6 @@ export default (config, env, helpers) => {
 	];
 	// remove the old loader options
 	delete babel.options;
-
-	config.resolve.alias = Object.assign({}, config.resolve.alias, {
-		react: 'preact-compat',
-		'react-dom': 'preact-compat',
-		styles: path.join(__dirname, './src/styles'),
-		components: path.join(__dirname, './src/components'),
-		autoI18n: path.resolve(__dirname, './src/i18n'),
-	});
-
-	config.plugins.push(
-		new webpack.ProvidePlugin({
-			I18n: ['autoI18n', 'default'],
-		})
-	);
+	config = webpackOverride(config);
 	return config;
 };

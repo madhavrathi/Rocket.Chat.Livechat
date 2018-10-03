@@ -1,17 +1,10 @@
 
 const webpack  = require('webpack');
-const path = require('path');
+const webpackOverride = require('../webpackOverride.config');
 
 module.exports = (baseConfig, env, defaultConfig) => {
 	// we are extending the base alias config here, adding preact as an alias
-	defaultConfig.resolve.alias = {
-		...defaultConfig.resolve.alias,
-		'react': 'preact-compat',
-		'react-dom': 'preact-compat',
-		'styles': path.join(__dirname, '../src/styles'),
-		'components': path.join(__dirname, '../src/components'),
-		'autoI18n': path.resolve(__dirname, '../src/i18n')
-	};
+	defaultConfig = webpackOverride(defaultConfig, env);
 
 	defaultConfig.resolve.extensions.push('.css');
 	defaultConfig.resolve.extensions.push('.scss');
@@ -62,6 +55,11 @@ module.exports = (baseConfig, env, defaultConfig) => {
 		]
 	}
 
+	defaultConfig.module.rules.push({
+		test: /(stories|story)\.js$/,
+		loaders: [require.resolve('@storybook/addon-storysource/loader')],
+		enforce: 'pre',
+	});
 
 	return defaultConfig;
 };

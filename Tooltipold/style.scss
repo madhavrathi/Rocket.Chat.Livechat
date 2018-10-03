@@ -1,0 +1,8 @@
+@import '~styles/colors';
+@import '~styles/variables';
+@import '~styles/helpers';
+
+:global(.tooltip) {
+    padding: 16px;
+    background: red;
+}

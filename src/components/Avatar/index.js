@@ -1,10 +1,16 @@
 import { h } from 'preact';
-import { className } from 'components/helpers';
-import style from './style';
+import styles from './styles';
+import { createClassName } from '../helpers';
+import placeholder from './placeholder.png';
 
 const Avatar = ({ small, large, src, description, ...args }) => (
-	<div aria-label="User picture" {...args} className={className(style, 'wrapper', { small, large })}>
-		{src && <img alt={description} className={className(style, 'image', { small, large })} src={src} />}
-	</div>);
+	<div
+		aria-label="User picture"
+		className={createClassName(styles, 'avatar', { small, large })}
+		{...args}
+	>
+		{src && <img alt={description} className={createClassName(styles, 'avatar__image')} src={src} />}
+	</div>
+);
 
 export default Avatar;

@@ -1,13 +1,13 @@
 import { h } from 'preact';
-import { className } from 'components/helpers';
-import style from './style';
-
+import { createClassName } from '../helpers';
+import styles from './styles';
 
 const Composer = ({ pre, post, placeholder, ...args }) => (
-	<div {...args} className={className(style, 'composer', {})}>
+	<div {...args} className={createClassName(styles, 'composer')}>
 		{ pre }
-		<div placeholder={placeholder} className={className(style, 'input', {})} contenteditable />
+		<div placeholder={placeholder} className={createClassName(styles, 'composer__input')} contenteditable />
 		{ post }
-	</div>);
+	</div>
+);
 
 export default Composer;

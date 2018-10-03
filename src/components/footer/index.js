@@ -1,13 +1,14 @@
 import { h } from 'preact';
-import style from './style';
+import styles from './styles';
 
-export const Container = ({ children }) => <div class={style.container}>{children}</div>;
+export const Container = ({ children }) => <div class={styles.container}>{children}</div>;
 
 const Footer = ({ children }) => (
-	<footer class={style.footer}>
+	<footer class={styles.footer}>
 		{children}
 	</footer>
 );
 
-export const Powered = () => <h3 class={style.powered}>Powered by Rocket.Chat</h3>;
+export const PoweredBy = () => <h3 class={styles.powered}>Powered by Rocket.Chat</h3>;
+
 export default Footer;
