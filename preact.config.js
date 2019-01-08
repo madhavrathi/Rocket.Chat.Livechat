@@ -6,7 +6,7 @@ import webpackOverride from './webpackOverride.config';
 
 export default (config/* , env, helpers */) => {
 
-	config = webpackOverride(config);
+	webpackOverride(config);
 
 	config.mode = 'production';
 
@@ -107,6 +107,4 @@ export default (config/* , env, helpers */) => {
 	};
 
 	config.plugins.push(new BundleAnalyzerPlugin({ openAnalyzer: false }));
-
-	return config;
 };

@@ -4,7 +4,7 @@ const webpackOverride = require('../webpackOverride.config');
 
 module.exports = (baseConfig, env, config) => {
 
-	config = webpackOverride(config, env);
+	webpackOverride(config, env);
 
 	config.module.rules = config.module.rules.filter(({ loader }) => !/json-loader/.test(loader));
 

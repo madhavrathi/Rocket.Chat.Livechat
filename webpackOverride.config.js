@@ -20,15 +20,11 @@ const patchBabelLoader = (config) => {
 			],
 		},
 	];
-
-	return config;
 };
 
 const patchFileLoader = (config) => {
 	const fileLoader = config.module.rules.find(({ loader }) => /file-loader|url-loader/.test(loader));
 	fileLoader.test = /\.(woff2?|ttf|eot|jpe?g|png|gif|mp4|mov|ogg|webm)(\?.*)?$/i;
-
-	return config;
 };
 
 module.exports = (config/* , env */) => {
@@ -49,8 +45,8 @@ module.exports = (config/* , env */) => {
 		}
 	);
 
-	config = patchBabelLoader(config);
-	config = patchFileLoader(config);
+	patchBabelLoader(config);
+	patchFileLoader(config);
 
 	config.module.rules.push({
 		test: /\.svg$/,
@@ -66,6 +62,4 @@ module.exports = (config/* , env */) => {
 			I18n: ['autoI18n', 'default'],
 		})
 	);
-
-	return config;
 };
