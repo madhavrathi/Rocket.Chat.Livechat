@@ -8,6 +8,7 @@
 	align-items: stretch;
 	background-color: $bg-color-white;
 	overflow: hidden;
+	box-shadow: 0 7px 16px 0 rgba(0, 0, 0, 0.1);
 
 	&--rounded {
 		border-radius: 4px;
