@@ -108,7 +108,7 @@ export class ChatContainer extends Component {
 			onSubmit={this.handleSubmit}
 			onUpload={this.handleUpload}
 			onPlaySound={this.handlePlaySound}
-			options={true}
+			options
 			onChangeDepartment={this.onChangeDepartment}
 			onFinishChat={this.onFinishChat}
 		/>

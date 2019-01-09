@@ -37,6 +37,26 @@ export class App extends Component {
 		CustomFields.reset();
 	}
 
+	handleMinimize = () => {
+		const { dispatch } = this.props;
+		dispatch({ minimized: true });
+	}
+
+	handleRestore = () => {
+		const { dispatch } = this.props;
+		dispatch({ minimized: false });
+	}
+
+	handleEnableNotifications = () => {
+		const { dispatch, sound = {} } = this.props;
+		dispatch({ sound: { ...sound, enabled: true } });
+	}
+
+	handleDisableNotifications = () => {
+		const { dispatch, sound = {} } = this.props;
+		dispatch({ sound: { ...sound, enabled: false } });
+	}
+
 	componentDidMount() {
 		this.initialize();
 	}
@@ -45,26 +65,46 @@ export class App extends Component {
 		this.finalize();
 	}
 
-	renderScreen() {
-		const { user, config, triggered } = this.props;
-		const { settings: { registrationForm, nameFieldRegistrationForm, emailFieldRegistrationForm }, online } = config;
+	renderScreen = ({
+		config: {
+			settings: {
+				registrationForm,
+				nameFieldRegistrationForm,
+				emailFieldRegistrationForm,
+			},
+			online,
+		},
+		minimized,
+		notificationsEnabled,
+		triggered,
+		user,
+	}) => {
+		const screenProps = {
+			notificationsEnabled,
+			onEnableNotifications: this.handleEnableNotifications,
+			onDisableNotifications: this.handleDisableNotifications,
+			minimized,
+			onMinimize: this.handleMinimize,
+			onRestore: this.handleRestore,
+		};
 
 		if (!online) {
-			return <LeaveMessage default path="/LeaveMessage" />;
+			return <LeaveMessage default path="/LeaveMessage" {...screenProps} />;
 		}
 
 		const showRegistrationForm = registrationForm && (nameFieldRegistrationForm || emailFieldRegistrationForm);
 		if ((user && user.token) || !showRegistrationForm || triggered) {
-			return <Chat default path="/home" />;
+			return <Chat default path="/home" {...screenProps} />;
 		}
-		return <Register default path="/register" />;
+
+		return <Register default path="/register" {...screenProps} />;
 	}
 
-	render = ({ }, { initialized = false }) => (
+	render = ({ minimized }, { initialized = false }) => (
 		initialized ? (
-			<FloatingChat>
+			<FloatingChat minimized={minimized} onMinimize={this.handleMinimize} onRestore={this.handleRestore}>
 				<Router onChange={this.handleRoute}>
-					{this.renderScreen()}
+					{this.renderScreen(this.props, this.state)}
 				</Router>
 			</FloatingChat>
 		) : null
@@ -78,13 +118,22 @@ const AppConnector = () => (
 			<StoreConsumer>
 				{({
 					config,
-					user,
+					minimized = false,
+					sound = {},
 					triggered,
+					user,
+					windowed = false,
+					dispatch,
 				}) => (
 					<App
 						config={config}
-						user={user}
+						notificationsEnabled={sound.enabled}
+						minimized={minimized}
+						windowed={windowed}
+						sound={sound}
 						triggered={triggered}
+						user={user}
+						dispatch={dispatch}
 					/>
 				)}
 			</StoreConsumer>
