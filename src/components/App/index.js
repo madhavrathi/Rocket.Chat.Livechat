@@ -7,6 +7,7 @@ import { Provider as StoreProvider, Consumer as StoreConsumer } from '../../stor
 import { loadConfig } from '../../lib/main';
 import CustomFields from '../../lib/customFields';
 import Triggers from '../../lib/triggers';
+import FloatingChat from '../FloatingChat';
 
 
 export class App extends Component {
@@ -59,10 +60,14 @@ export class App extends Component {
 		return <Register default path="/register" />;
 	}
 
-	render = () => (this.state.initialized &&
-		<Router onChange={this.handleRoute}>
-			{this.renderScreen()}
-		</Router>
+	render = ({ }, { initialized = false }) => (
+		initialized ? (
+			<FloatingChat>
+				<Router onChange={this.handleRoute}>
+					{this.renderScreen()}
+				</Router>
+			</FloatingChat>
+		) : null
 	)
 }
 

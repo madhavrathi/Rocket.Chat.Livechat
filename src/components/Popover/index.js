@@ -54,19 +54,19 @@ export class PopoverContainer extends Component {
 	}
 
 	render = ({ children }, { renderer, overlayProps, overlayBounds, triggerBounds }) => (
-		<PopoverContext.Provider
-			value={{ open: this.open }}
-		>
-			{children}
-			<PopoverOverlay
-				ref={this.handleOverlayRef}
-				onMouseDown={this.handleDismiss}
-				onTouchStart={this.handleDismiss}
-				visible={!!renderer}
-				{...overlayProps}
-			>
-				{renderer ? renderer({ dismiss: this.dismiss, overlayBounds, triggerBounds }) : null}
-			</PopoverOverlay>
+		<PopoverContext.Provider value={{ open: this.open }}>
+			<div className={createClassName(styles, 'popover__container')}>
+				{children}
+				<PopoverOverlay
+					ref={this.handleOverlayRef}
+					onMouseDown={this.handleDismiss}
+					onTouchStart={this.handleDismiss}
+					visible={!!renderer}
+					{...overlayProps}
+				>
+					{renderer ? renderer({ dismiss: this.dismiss, overlayBounds, triggerBounds }) : null}
+				</PopoverOverlay>
+			</div>
 		</PopoverContext.Provider>
 	)
 }

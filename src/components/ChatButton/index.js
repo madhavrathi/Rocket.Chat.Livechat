@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { createClassName } from '../helpers';
 import styles from './styles';
 import ChatIcon from '../../icons/plus.svg';

@@ -2,11 +2,11 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
 import { withKnobs, boolean, color, text, object } from '@storybook/addon-knobs';
-import { Screen } from '.';
+import { Screen, FloatingScreen } from './component';
 
 
 const screenCentered = (storyFn) => centered(() => (
-	<div style={{ display: 'flex', width: '365px', background: 'white' }}>
+	<div style={{ display: 'flex', width: '365px' }}>
 		{storyFn()}
 	</div>
 ));
